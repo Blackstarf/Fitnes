@@ -8,6 +8,7 @@ namespace Fitnes
         private string path = "C:\\Users\\B-ZONE\\OneDrive\\Рабочий стол\\Fitnes\\Resource\\Viking.db";
         // Убрали коммент fsuajidghfoaisudfh
         // da
+        // YES YES YES
         public Form3()
         {
             InitializeComponent();
