@@ -6,7 +6,6 @@ namespace Fitnes
     public partial class Form3 : Form
     {
         private string path = "C:\\Users\\B-ZONE\\OneDrive\\Рабочий стол\\Fitnes\\Resource\\Viking.db";
-        //ghkyhtgkdyfgjfcgfjryfgk
         public Form3()
         {
             InitializeComponent();
