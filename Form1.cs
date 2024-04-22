@@ -374,6 +374,14 @@ namespace Fitnes
 
                     using (var command = connection.CreateCommand())
                     {
+                        if (columnName == "Data")
+                        {
+                            command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
+                            string[] s = newValue.Split(".");
+                            DateTime dateTime = new DateTime(Int32.Parse(s[0]),);
+                            command.Parameters.AddWithValue("@newValue", newValue);
+                            command.Parameters.AddWithValue("@id", ID);
+                        }
                         // Предполагая, что у нас есть колонка Id для идентификации клиента
                         command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
                         command.Parameters.AddWithValue("@newValue", newValue);
@@ -436,7 +444,7 @@ namespace Fitnes
         }
         private void buttonDateBirt_Click(object sender, EventArgs e)
         {
-            
+            ShowTextBoxAndUpdate("Data");
         }
 
         private void button2_Click(object sender, EventArgs e)

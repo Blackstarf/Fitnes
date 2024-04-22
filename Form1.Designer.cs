@@ -85,11 +85,11 @@
             panel7 = new Panel();
             pictureBox8 = new PictureBox();
             label1 = new Label();
-            pictureBox2 = new PictureBox();
-            pictureBox1 = new PictureBox();
             panel2 = new Panel();
             label2 = new Label();
             panel1 = new Panel();
+            pictureBox1 = new PictureBox();
+            pictureBox2 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -106,10 +106,10 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -715,32 +715,6 @@
             label1.TabIndex = 2;
             label1.Text = "VIKING";
             // 
-            // pictureBox2
-            // 
-            pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox2.Cursor = Cursors.Hand;
-            pictureBox2.Image = Properties.Resources.windowminimize_104316;
-            pictureBox2.Location = new Point(652, 3);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(41, 39);
-            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox2.TabIndex = 1;
-            pictureBox2.TabStop = false;
-            pictureBox2.Click += MinimizeWindows;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Image = Properties.Resources.windowclose_104378;
-            pictureBox1.Location = new Point(699, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 39);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += CloseWindows;
-            // 
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(39, 40, 41);
@@ -776,6 +750,30 @@
             panel1.TabIndex = 5;
             panel1.MouseDown += panel1MouseDown;
             panel1.MouseMove += panelMouseMove;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Location = new Point(699, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(41, 39);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += CloseWindows;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.Location = new Point(652, 3);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(41, 39);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 1;
+            pictureBox2.TabStop = false;
+            pictureBox2.Click += MinimizeWindows;
             // 
             // Form1
             // 
@@ -816,12 +814,12 @@
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
         }
 
@@ -854,8 +852,6 @@
         private Panel panel7;
         private PictureBox pictureBox8;
         private Label label1;
-        private PictureBox pictureBox2;
-        private PictureBox pictureBox1;
         private Panel panel2;
         private Label label2;
         private Panel panel1;
@@ -886,5 +882,7 @@
         private Button button3;
         private TextBox textBox2;
         private TextBox textBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox1;
     }
 }
