@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "4EAyG+fiXaAtDdstg2ivxK2O0NAvVJ0FFqsWWQ3S3FC+e5Bs96fRWfPrRrFimL2MLMbt95REUBV66dNYIbn37g==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lalka\\source\\repos\\Fit\\Fitnes.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lalka\\.nuget\\packages\\microsoft.data.sqlite\\9.0.0-preview.3.24172.4\\microsoft.data.sqlite.9.0.0-preview.3.24172.4.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\microsoft.data.sqlite.core\\9.0.0-preview.3.24172.4\\microsoft.data.sqlite.core.9.0.0-preview.3.24172.4.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\sqlitepclraw.bundle_e_sqlite3\\2.1.7\\sqlitepclraw.bundle_e_sqlite3.2.1.7.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\sqlitepclraw.core\\2.1.7\\sqlitepclraw.core.2.1.7.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\sqlitepclraw.lib.e_sqlite3\\2.1.7\\sqlitepclraw.lib.e_sqlite3.2.1.7.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\sqlitepclraw.provider.e_sqlite3\\2.1.7\\sqlitepclraw.provider.e_sqlite3.2.1.7.nupkg.sha512",
+    "C:\\Users\\lalka\\.nuget\\packages\\system.memory\\4.5.3\\system.memory.4.5.3.nupkg.sha512"
+  ],
+  "logs": []
+}
