@@ -1,6 +1,10 @@
 
+using Accessibility;
 using Microsoft.Data.Sqlite;
 using System.IO;
+using System.Runtime.Serialization.Formatters;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 using Timer = System.Windows.Forms.Timer;
 namespace Fitnes
 {
@@ -9,7 +13,7 @@ namespace Fitnes
     {
         string ID;
         string newValue;
-        private string path = "Viking.db";
+        private string path = "C:\\Users\\lalka\\source\\repos\\Fit\\bin\\Debug\\net6.0-windows\\Resource\\Viking.db";
         string Data2;
         public Form1()
         {
@@ -245,7 +249,7 @@ namespace Fitnes
                 string[] Data = dateTimePicker1.Text.Split("/");
                 string Data2 = dateTimePicker1.Text;
                 string Number = phoneNumBox.Text;
-                DateTime birthDate = new DateTime(Int32.Parse(Data[2]), Int32.Parse(Data[0]), Int32.Parse(Data[1]));
+                DateTime birthDate = DateTime.Parse(dateTimePicker1.Text);
 
                 // Получаем текущую дату
                 DateTime currentDate = DateTime.Today;
@@ -258,7 +262,6 @@ namespace Fitnes
                 {
                     age--;
                 }
-                string path = "Viking.db";
 
                 using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
                 {
@@ -378,7 +381,7 @@ namespace Fitnes
                         {
                             command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
                             string[] s = newValue.Split(".");
-                            DateTime dateTime = new DateTime(Int32.Parse(s[0]),);
+                            //DateTime dateTime = new DateTime(Int32.Parse(s[0]);
                             command.Parameters.AddWithValue("@newValue", newValue);
                             command.Parameters.AddWithValue("@id", ID);
                         }
@@ -460,6 +463,30 @@ namespace Fitnes
         private void buttonDateBirt_Click_1(object sender, EventArgs e)
         {
             UpdateClientDateBrt();
+        }
+
+        private void GenerateClientButton(object sender, EventArgs e)
+        {
+            using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
+            {
+                connection.Open();
+                string sqlExpression = "DELETE FROM clients";
+
+                using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
+                {
+                    // Выполните запрос
+                    command.ExecuteNonQuery();
+                }
+
+
+
+            }
+            for (int i = 0; i < 200; i++)
+                {
+                    DataGenerator dataGenerator = new DataGenerator();
+                    dataGenerator.GenerateRandomData();
+                }
+
         }
     }
 }

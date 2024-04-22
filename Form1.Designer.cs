@@ -76,6 +76,7 @@
             pictureBox5 = new PictureBox();
             panel3 = new Panel();
             panel9 = new Panel();
+            button4 = new Button();
             label12 = new Label();
             label11 = new Label();
             pictureBox7 = new PictureBox();
@@ -88,8 +89,8 @@
             panel2 = new Panel();
             label2 = new Label();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -108,8 +109,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -587,10 +588,10 @@
             panel3.Controls.Add(panel7);
             panel3.Controls.Add(panel6);
             panel3.Controls.Add(panel5);
-            panel3.Controls.Add(panelchangeclient);
             panel3.Controls.Add(panelregclient);
             panel3.Controls.Add(paneldeleteclient);
             panel3.Controls.Add(panelshowclient);
+            panel3.Controls.Add(panelchangeclient);
             panel3.Location = new Point(12, 120);
             panel3.Name = "panel3";
             panel3.Size = new Size(719, 444);
@@ -599,6 +600,7 @@
             // panel9
             // 
             panel9.BackColor = Color.FromArgb(39, 43, 49);
+            panel9.Controls.Add(button4);
             panel9.Controls.Add(label12);
             panel9.Controls.Add(label11);
             panel9.Controls.Add(pictureBox7);
@@ -606,6 +608,16 @@
             panel9.Name = "panel9";
             panel9.Size = new Size(209, 235);
             panel9.TabIndex = 15;
+            // 
+            // button4
+            // 
+            button4.Location = new Point(4, 37);
+            button4.Name = "button4";
+            button4.Size = new Size(105, 51);
+            button4.TabIndex = 39;
+            button4.Text = "Сгенерировать клиентов";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += GenerateClientButton;
             // 
             // label12
             // 
@@ -696,7 +708,6 @@
             // 
             // pictureBox8
             // 
-            pictureBox8.Image = Properties.Resources.Removal_155;
             pictureBox8.Location = new Point(180, -5);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(75, 61);
@@ -751,18 +762,6 @@
             panel1.MouseDown += panel1MouseDown;
             panel1.MouseMove += panelMouseMove;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Location = new Point(699, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 39);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += CloseWindows;
-            // 
             // pictureBox2
             // 
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
@@ -774,6 +773,18 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             pictureBox2.Click += MinimizeWindows;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Location = new Point(699, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(41, 39);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += CloseWindows;
             // 
             // Form1
             // 
@@ -818,8 +829,8 @@
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -884,5 +895,6 @@
         private TextBox textBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private Button button4;
     }
 }
