@@ -1,6 +1,8 @@
 
 using Microsoft.Data.Sqlite;
+using System.Globalization;
 using System.IO;
+using System.Text.RegularExpressions;
 using Timer = System.Windows.Forms.Timer;
 namespace Fitnes
 {
@@ -343,7 +345,7 @@ namespace Fitnes
                                 // Убираем текстовые поля для ввода фамилии и имени
                                 textBox1.Visible = false;
                                 textBox2.Visible = false;
-                                button1.Visible = false;
+                                button3.Visible = false;
                             }
                             else
                             {
@@ -358,6 +360,7 @@ namespace Fitnes
                 MessageBox.Show($"An error occurred while searching: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
         private void ShowTextBoxAndUpdate(string columnName)
         {
             textBox3.Visible = true;
@@ -376,16 +379,36 @@ namespace Fitnes
                     {
                         if (columnName == "Data")
                         {
+
+                            command.CommandText = $"UPDATE Clients SET {columnName} = @newValue, Age = @newAge WHERE ID = @id";
+                            //DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                            DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                            DateTime numericDate = DateTime.Parse(dateTime.ToString("MM/dd/yyyy"));
+                            command.Parameters.AddWithValue("@newValue", numericDate);
+                            //string formattedDate = dateTime.ToString("MM/dd/yyyy");
+                            DateTime birthDate = DateTime.Parse(newValue);
+                            // Получаем текущую дату
+                            DateTime currentDate = DateTime.Today;
+                            // Рассчитываем разницу между текущей датой и датой рождения в годах
+                            int age = currentDate.Year - birthDate.Year;
+                            // Проверяем, нужно ли скорректировать возраст на основе месяца и дня рождения
+                            if (currentDate.Month < birthDate.Month || (currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day))
+                            {
+                                age--;
+                            }
+                            //command.CommandText = $"UPDATE Clients SET  = @newValue WHERE ID = @id";
+
+                            command.Parameters.AddWithValue("@newAge", age);
+                            command.Parameters.AddWithValue("@id", ID);
+                        }
+                        else
+                        {
+                            // Предполагая, что у нас есть колонка Id для идентификации клиента
                             command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
-                            string[] s = newValue.Split(".");
-                            DateTime dateTime = new DateTime(Int32.Parse(s[0]),);
                             command.Parameters.AddWithValue("@newValue", newValue);
                             command.Parameters.AddWithValue("@id", ID);
                         }
-                        // Предполагая, что у нас есть колонка Id для идентификации клиента
-                        command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
-                        command.Parameters.AddWithValue("@newValue", newValue);
-                        command.Parameters.AddWithValue("@id", ID);
+
 
                         command.ExecuteNonQuery();
                     }
@@ -460,6 +483,55 @@ namespace Fitnes
         private void buttonDateBirt_Click_1(object sender, EventArgs e)
         {
             UpdateClientDateBrt();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string firstName = textBox7.Text;
+            string lastName = textBox6.Text;
+            //try
+            //{
+            using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
+            {
+                connection.Open();
+
+                using (var command = connection.CreateCommand())
+                {
+                    // Поиск пользователя по фамилии и имени
+                    command.CommandText = "SELECT Id FROM Clients WHERE FirstName = @firstName AND Name = @lastName";
+                    command.Parameters.AddWithValue("@firstName", firstName);
+                    command.Parameters.AddWithValue("@lastName", lastName);
+
+                    // Получение Id пользователя
+                    string clientId;
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            clientId = reader["Id"].ToString();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Client not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
+                    }
+
+                    // Удаление пользователя из базы данных
+                    command.CommandText = "DELETE FROM Clients WHERE Id = @id";
+                    command.Parameters.Clear();
+                    command.Parameters.AddWithValue("@id", clientId);
+                    command.ExecuteNonQuery();
+                }
+            }
+
+            MessageBox.Show("Client deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show($"An error occurred while deleting data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //}
+
         }
     }
 }

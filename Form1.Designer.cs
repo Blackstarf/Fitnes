@@ -57,10 +57,17 @@
             familiyaBox = new TextBox();
             nameBox = new TextBox();
             paneldeleteclient = new Panel();
+            label17 = new Label();
+            label18 = new Label();
+            button5 = new Button();
+            textBox6 = new TextBox();
+            textBox7 = new TextBox();
             label7 = new Label();
             panelshowclient = new Panel();
             label8 = new Label();
             panelchangeclient = new Panel();
+            label14 = new Label();
+            label13 = new Label();
             button2 = new Button();
             textBox3 = new TextBox();
             buttonBirthDate = new Button();
@@ -88,8 +95,8 @@
             panel2 = new Panel();
             label2 = new Label();
             panel1 = new Panel();
-            pictureBox1 = new PictureBox();
             pictureBox2 = new PictureBox();
+            pictureBox1 = new PictureBox();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -108,8 +115,8 @@
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // label5
@@ -409,12 +416,59 @@
             // paneldeleteclient
             // 
             paneldeleteclient.BackColor = Color.DarkGray;
+            paneldeleteclient.Controls.Add(label17);
+            paneldeleteclient.Controls.Add(label18);
+            paneldeleteclient.Controls.Add(button5);
+            paneldeleteclient.Controls.Add(textBox6);
+            paneldeleteclient.Controls.Add(textBox7);
             paneldeleteclient.Controls.Add(label7);
             paneldeleteclient.Location = new Point(218, 3);
             paneldeleteclient.Name = "paneldeleteclient";
             paneldeleteclient.Size = new Size(498, 438);
             paneldeleteclient.TabIndex = 1;
             paneldeleteclient.Visible = false;
+            // 
+            // label17
+            // 
+            label17.AutoSize = true;
+            label17.Location = new Point(160, 164);
+            label17.Name = "label17";
+            label17.Size = new Size(75, 15);
+            label17.TabIndex = 27;
+            label17.Text = "Введите имя";
+            // 
+            // label18
+            // 
+            label18.AutoSize = true;
+            label18.Location = new Point(160, 90);
+            label18.Name = "label18";
+            label18.Size = new Size(108, 15);
+            label18.TabIndex = 26;
+            label18.Text = "Введите фамилию";
+            // 
+            // button5
+            // 
+            button5.Location = new Point(147, 234);
+            button5.Name = "button5";
+            button5.Size = new Size(130, 39);
+            button5.TabIndex = 25;
+            button5.Text = "Найдем и удалим";
+            button5.UseVisualStyleBackColor = true;
+            button5.Click += button5_Click;
+            // 
+            // textBox6
+            // 
+            textBox6.Location = new Point(160, 186);
+            textBox6.Name = "textBox6";
+            textBox6.Size = new Size(100, 23);
+            textBox6.TabIndex = 24;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(160, 117);
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(100, 23);
+            textBox7.TabIndex = 23;
             // 
             // label7
             // 
@@ -447,6 +501,8 @@
             // panelchangeclient
             // 
             panelchangeclient.BackColor = Color.DarkGray;
+            panelchangeclient.Controls.Add(label14);
+            panelchangeclient.Controls.Add(label13);
             panelchangeclient.Controls.Add(button2);
             panelchangeclient.Controls.Add(textBox3);
             panelchangeclient.Controls.Add(buttonBirthDate);
@@ -465,13 +521,31 @@
             panelchangeclient.Visible = false;
             panelchangeclient.Paint += panelchangeclient_Paint;
             // 
+            // label14
+            // 
+            label14.AutoSize = true;
+            label14.Location = new Point(152, 153);
+            label14.Name = "label14";
+            label14.Size = new Size(75, 15);
+            label14.TabIndex = 22;
+            label14.Text = "Введите имя";
+            // 
+            // label13
+            // 
+            label13.AutoSize = true;
+            label13.Location = new Point(152, 79);
+            label13.Name = "label13";
+            label13.Size = new Size(108, 15);
+            label13.TabIndex = 21;
+            label13.Text = "Введите фамилию";
+            // 
             // button2
             // 
-            button2.Location = new Point(216, 278);
+            button2.Location = new Point(216, 274);
             button2.Name = "button2";
-            button2.Size = new Size(37, 27);
+            button2.Size = new Size(84, 27);
             button2.TabIndex = 20;
-            button2.Text = "button2";
+            button2.Text = "Сохранить";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
@@ -489,7 +563,7 @@
             buttonBirthDate.Name = "buttonBirthDate";
             buttonBirthDate.Size = new Size(75, 23);
             buttonBirthDate.TabIndex = 18;
-            buttonBirthDate.Text = "BirthDate";
+            buttonBirthDate.Text = "Дата";
             buttonBirthDate.UseVisualStyleBackColor = true;
             buttonBirthDate.Click += buttonDateBirt_Click;
             // 
@@ -499,7 +573,7 @@
             buttonPhoneNumber.Name = "buttonPhoneNumber";
             buttonPhoneNumber.Size = new Size(75, 23);
             buttonPhoneNumber.TabIndex = 17;
-            buttonPhoneNumber.Text = "PhoneNumber";
+            buttonPhoneNumber.Text = "Номер";
             buttonPhoneNumber.UseVisualStyleBackColor = true;
             buttonPhoneNumber.Click += buttonNumber_Click;
             // 
@@ -509,7 +583,7 @@
             buttonPatronymic.Name = "buttonPatronymic";
             buttonPatronymic.Size = new Size(75, 23);
             buttonPatronymic.TabIndex = 16;
-            buttonPatronymic.Text = "Patronymic";
+            buttonPatronymic.Text = "Отчество";
             buttonPatronymic.UseVisualStyleBackColor = true;
             buttonPatronymic.Click += buttonOtName_Click;
             // 
@@ -519,7 +593,7 @@
             buttonName.Name = "buttonName";
             buttonName.Size = new Size(75, 23);
             buttonName.TabIndex = 15;
-            buttonName.Text = "Name";
+            buttonName.Text = "Имя";
             buttonName.UseVisualStyleBackColor = true;
             buttonName.Click += buttonName_Click;
             // 
@@ -529,17 +603,17 @@
             buttonFirstName.Name = "buttonFirstName";
             buttonFirstName.Size = new Size(75, 23);
             buttonFirstName.TabIndex = 14;
-            buttonFirstName.Text = "FirstName";
+            buttonFirstName.Text = "Фамилию";
             buttonFirstName.UseVisualStyleBackColor = true;
             buttonFirstName.Click += buttonFirstName_Click;
             // 
             // button3
             // 
-            button3.Location = new Point(164, 225);
+            button3.Location = new Point(139, 223);
             button3.Name = "button3";
-            button3.Size = new Size(75, 23);
+            button3.Size = new Size(130, 39);
             button3.TabIndex = 13;
-            button3.Text = "button3";
+            button3.Text = "Поиск чтобы изменить";
             button3.UseVisualStyleBackColor = true;
             button3.Click += button1_Click;
             // 
@@ -587,10 +661,10 @@
             panel3.Controls.Add(panel7);
             panel3.Controls.Add(panel6);
             panel3.Controls.Add(panel5);
+            panel3.Controls.Add(panelshowclient);
             panel3.Controls.Add(panelchangeclient);
             panel3.Controls.Add(panelregclient);
             panel3.Controls.Add(paneldeleteclient);
-            panel3.Controls.Add(panelshowclient);
             panel3.Location = new Point(12, 120);
             panel3.Name = "panel3";
             panel3.Size = new Size(719, 444);
@@ -751,18 +825,6 @@
             panel1.MouseDown += panel1MouseDown;
             panel1.MouseMove += panelMouseMove;
             // 
-            // pictureBox1
-            // 
-            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
-            pictureBox1.Cursor = Cursors.Hand;
-            pictureBox1.Location = new Point(699, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(41, 39);
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += CloseWindows;
-            // 
             // pictureBox2
             // 
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
@@ -774,6 +836,18 @@
             pictureBox2.TabIndex = 1;
             pictureBox2.TabStop = false;
             pictureBox2.Click += MinimizeWindows;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
+            pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Location = new Point(699, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(41, 39);
+            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += CloseWindows;
             // 
             // Form1
             // 
@@ -818,8 +892,8 @@
             panel2.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
@@ -884,5 +958,12 @@
         private TextBox textBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
+        private Label label13;
+        private Label label14;
+        private Label label17;
+        private Button button5;
+        private TextBox textBox6;
+        private Label label18;
+        private TextBox textBox7;
     }
 }
