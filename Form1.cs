@@ -1,28 +1,31 @@
-
-using Accessibility;
+using System.Data.SQLite;
 using Microsoft.Data.Sqlite;
+using Rndmgenerator;
 using System.Globalization;
-using System.IO;
-<<<<<<< HEAD
-using System.Text.RegularExpressions;
-=======
-using System.Runtime.Serialization.Formatters;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Xml.Linq;
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
 using Timer = System.Windows.Forms.Timer;
 namespace Fitnes
 {
 
     public partial class Form1 : Form
     {
-        string ID;
-        string newValue;
-        private string path = "C:\\Users\\lalka\\source\\repos\\Fit\\bin\\Debug\\net6.0-windows\\Resource\\Viking.db";
-        string Data2;
+        string? newValue;
+        string? ID;
+        private string path = "Viking.db";
+        string? Data2;
         public Form1()
         {
+
             InitializeComponent();
+            DataView.Columns.Add("FirstName", "Фамилия");
+            DataView.Columns.Add("Name", "Имя");
+            DataView.Columns.Add("Otchestvo", "Отчество");
+            DataView.Columns.Add("Data", "Дата рождения");
+            DataView.Columns.Add("Number", "Номер телефона");
+            DataView.Columns.Add("Age", "Возраст");
+            DataView.Columns.Add("Status", "Статус");
+            DataView.Columns.Add("Subscription", "Подписка");
+            DataView.Columns.Add("ID", "ID");
+            DataView.Columns.Add("DateReg", "Дата регистрации");
             OtchestvoBox.TextChanged += OtchestvoBox_TextChanged;
             familiyaBox.TextChanged += familiyaBox_TextChanged_1;
             phoneNumBox.TextChanged += phoneNumBox_TextChanged_1;
@@ -34,6 +37,7 @@ namespace Fitnes
             buttonBirthDate.Visible = false;
             textBox3.Visible = false;
             button2.Visible = false;
+            label20.Visible = false;
             {
                 Timer timer = new Timer();
                 timer.Interval = 1000;
@@ -158,58 +162,7 @@ namespace Fitnes
                 e.Handled = true;
             }
         }
-        Point lastpoint;
-        private void panelMouseMove(object sender, MouseEventArgs e)
-        {
-            if (e.Button == MouseButtons.Left)
-            {
-                this.Left += e.X - lastpoint.X;
-                this.Top += e.Y - lastpoint.Y;
-            }
-        }
-        private void panel1MouseDown(object sender, MouseEventArgs e)
-        {
-            lastpoint = new Point(e.X, e.Y);
-        }
-        private void CloseWindows(object sender, EventArgs e)
-        {
-            Close();
-        }
-        private void MinimizeWindows(object sender, EventArgs e)
-        {
-            WindowState = FormWindowState.Minimized;
-        }
-        private void PanelRegClient(object sender, EventArgs e)
-        {
-            panelshowclient.Visible = false;
-            panelregclient.Visible = true;
-            paneldeleteclient.Visible = false;
-            panelchangeclient.Visible = false;
-        }
 
-        private void PanelShowClient(object sender, EventArgs e)
-        {
-            panelshowclient.Visible = true;
-            panelregclient.Visible = false;
-            paneldeleteclient.Visible = false;
-            panelchangeclient.Visible = false;
-        }
-
-        private void PanelChangeClient(object sender, EventArgs e)
-        {
-            panelshowclient.Visible = false;
-            panelregclient.Visible = false;
-            paneldeleteclient.Visible = false;
-            panelchangeclient.Visible = true;
-        }
-
-        private void PanelDeleteclient(object sender, EventArgs e)
-        {
-            panelshowclient.Visible = false;
-            panelregclient.Visible = false;
-            paneldeleteclient.Visible = true;
-            panelchangeclient.Visible = false;
-        }
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -240,7 +193,6 @@ namespace Fitnes
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            string[] Data1 = DateTime.Today.ToString().Split(" ");
             if (OtchestvoBox.Text != "" && phoneNumBox.Text != "" && nameBox.Text != "" && familiyaBox.Text != "")
             {
                 string[] Statuses = { "клиент", "бизнес-клиен", "вип-клиент" };
@@ -251,7 +203,6 @@ namespace Fitnes
                 string FirstName1 = familiyaBox.Text;
                 string Name = nameBox.Text;
                 string OtName = OtchestvoBox.Text;
-                string[] Data = dateTimePicker1.Text.Split("/");
                 string Data2 = dateTimePicker1.Text;
                 string Number = phoneNumBox.Text;
                 DateTime birthDate = DateTime.Parse(dateTimePicker1.Text);
@@ -267,10 +218,32 @@ namespace Fitnes
                 {
                     age--;
                 }
-
+                //using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
+                //{
+                //    connection.Open();
+                //    string sqlExpression = "WHERE Number = @Number";
+                //    using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
+                //    {
+                //        command.Parameters.AddWithValue("@Number", Number);
+                //    }
                 using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
                 {
                     connection.Open();
+
+                    // Проверяем, существует ли номер телефона в базе данных
+                    string checkPhoneNumberQuery = "SELECT COUNT(*) FROM clients WHERE Number = @Number";
+                    using (SqliteCommand checkPhoneNumberCommand = new SqliteCommand(checkPhoneNumberQuery, connection))
+                    {
+                        checkPhoneNumberCommand.Parameters.AddWithValue("@Number", Number);
+                        int count = Convert.ToInt32(checkPhoneNumberCommand.ExecuteScalar());
+
+                        // Если номер телефона уже существует, отображаем сообщение об ошибке
+                        if (count > 0)
+                        {
+                            MessageBox.Show("Номер телефона уже существует в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return; // Прекращаем выполнение операции добавления
+                        }
+                    }
                     string sqlExpression = "INSERT INTO clients (FirstName, Name, Otchestvo, Data, Number, Age,Status,Subscription,ID,DateReg) VALUES (@FirstName, @Name, @OtName, @Data2, @Number, @age,@Statuses, @Days, @GuidID,@DateReg)";
                     using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
                     {
@@ -284,7 +257,7 @@ namespace Fitnes
                         command.Parameters.AddWithValue("@Statuses", Statuses[randomNumber]);
                         command.Parameters.AddWithValue("@Days", randomDay);
                         command.Parameters.AddWithValue("@GuidID", Guid.NewGuid());
-                        command.Parameters.AddWithValue("@DateReg", DateTime.Now);
+                        command.Parameters.AddWithValue("@DateReg", Convert.ToString(DateTime.Now));
 
                         // Выполните запрос
                         command.ExecuteNonQuery();
@@ -307,6 +280,7 @@ namespace Fitnes
                 familiyaBox.Text = null;
                 phoneNumBox.Text = null;
                 dateTimePicker1.Text = null;
+                //}
             }
             else
             {
@@ -352,6 +326,8 @@ namespace Fitnes
                                 textBox1.Visible = false;
                                 textBox2.Visible = false;
                                 button3.Visible = false;
+                                label13.Visible = false;
+                                label14.Visible = false;
                             }
                             else
                             {
@@ -389,8 +365,9 @@ namespace Fitnes
                             command.CommandText = $"UPDATE Clients SET {columnName} = @newValue, Age = @newAge WHERE ID = @id";
                             //DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                             DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                            DateTime numericDate = DateTime.Parse(dateTime.ToString("MM/dd/yyyy"));
-                            command.Parameters.AddWithValue("@newValue", numericDate);
+                            //DateTime numericDate = DateTime.Parse(dateTime.ToString("MM/dd/yyyy"));
+                            string[] Data2 = Convert.ToString(dateTime).Split(" ");
+                            command.Parameters.AddWithValue("@newValue", Data2[0]);
                             //string formattedDate = dateTime.ToString("MM/dd/yyyy");
                             DateTime birthDate = DateTime.Parse(newValue);
                             // Получаем текущую дату
@@ -411,11 +388,6 @@ namespace Fitnes
                         {
                             // Предполагая, что у нас есть колонка Id для идентификации клиента
                             command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
-<<<<<<< HEAD
-=======
-                            string[] s = newValue.Split(".");
-                            //DateTime dateTime = new DateTime(Int32.Parse(s[0]);
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
                             command.Parameters.AddWithValue("@newValue", newValue);
                             command.Parameters.AddWithValue("@id", ID);
                         }
@@ -478,12 +450,29 @@ namespace Fitnes
         }
         private void buttonDateBirt_Click(object sender, EventArgs e)
         {
+            label20.Visible = true;
             ShowTextBoxAndUpdate("Data");
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             UpdateClientData(newValue, textBox3.Text);
+            textBox1.Text = null;
+            textBox2.Text = null;
+            textBox3.Text = null;
+            buttonFirstName.Visible = false;
+            buttonName.Visible = false;
+            buttonPatronymic.Visible = false;
+            buttonPhoneNumber.Visible = false;
+            buttonBirthDate.Visible = false;
+            label20.Visible = false;
+            textBox3.Visible = false;
+            button2.Visible = false;
+            textBox1.Visible = true;
+            textBox2.Visible = true;
+            button3.Visible = true;
+            label13.Visible = true;
+            label14.Visible = true;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -496,7 +485,6 @@ namespace Fitnes
             UpdateClientDateBrt();
         }
 
-<<<<<<< HEAD
         private void button5_Click(object sender, EventArgs e)
         {
             string firstName = textBox7.Text;
@@ -538,35 +526,87 @@ namespace Fitnes
             }
 
             MessageBox.Show("Client deleted successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            textBox7.Text = null;
+            textBox6.Text = null;
             //}
             //catch (Exception ex)
             //{
             //    MessageBox.Show($"An error occurred while deleting data: {ex.Message}", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             //}
-=======
-        private void GenerateClientButton(object sender, EventArgs e)
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
         {
+            string firstName = textBox5.Text;
+            string Name = textBox4.Text;
+
+
             using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
             {
                 connection.Open();
-                string sqlExpression = "DELETE FROM clients";
 
-                using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
+                using (var command = connection.CreateCommand())
                 {
-                    // Выполните запрос
+                    // Поиск клиента по фамилии и имени
+                    command.CommandText = "SELECT ID,DateReg,Subscription FROM clients WHERE FirstName = @firstName AND Name = @Name";
+                    command.Parameters.AddWithValue("@firstName", firstName);
+                    command.Parameters.AddWithValue("@Name", Name);
+
+                    using (var reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            // Найден клиент, отображаем кнопки для редактирования данных
+                            //ID = reader["ID"].ToString();
+                            //string DataReg = reader["DateReg"].ToString();
+                            string TimeAb = reader["Subscription"].ToString();
+                            DateTime dateTime = DateTime.Parse(reader["DateReg"].ToString());
+                            // Добавление указанного количества дней к дате регистрации
+                            DateTime expirationDate = dateTime.AddDays(Convert.ToInt32(TimeAb));
+
+                            // Вычисление времени, оставшегося до истечения срока действия
+                            TimeSpan timeRemaining = expirationDate - DateTime.Now;
+                            if (timeRemaining > TimeSpan.Zero)
+                            {
+                                string[] DataAb = timeRemaining.ToString().Split('.');
+                                MessageBox.Show($"Осталось:\nДней: {DataAb[0]}\nВремени: {DataAb[1]}");
+                                textBox5.Text = null;
+                                textBox4.Text = null;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Абонимент истёк");
+                                textBox5.Text = null;
+                                textBox4.Text = null;
+                            }
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Client not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string connectionString = $"Data Source={path};Cache=Default;Mode=ReadWrite;";
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                string sqlQuery = $"DELETE FROM Clients;"; // Запрос на удаление всех записей из указанной таблицы
+
+                using (SqliteCommand command = new SqliteCommand(sqlQuery, connection))
+                {
                     command.ExecuteNonQuery();
                 }
-
-
-
             }
-            for (int i = 0; i < 200; i++)
-                {
-                    DataGenerator dataGenerator = new DataGenerator();
-                    dataGenerator.GenerateRandomData();
-                }
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
 
+            RndmDBGenerator.GenerateRandomData(path);
         }
     }
 }

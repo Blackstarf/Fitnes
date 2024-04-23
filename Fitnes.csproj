@@ -6,20 +6,19 @@
     <Nullable>enable</Nullable>
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
-    <BaseOutputPath>C:\Users\lalka\source\repos\Fit\bin</BaseOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
-<<<<<<< HEAD
-=======
-    <Compile Remove="bin\**" />
-    <EmbeddedResource Remove="bin\**" />
-    <None Remove="bin\**" />
+    <Content Include="bin\Debug\net6.0-windows\familii.txt" />
+    <Content Include="bin\Debug\net6.0-windows\imena_muzhskie.txt" />
+    <Content Include="bin\Debug\net6.0-windows\imena_zhenskie.txt" />
+    <Content Include="bin\Debug\net6.0-windows\Otchestva_muzhskie.txt" />
+    <Content Include="bin\Debug\net6.0-windows\Otchestva_zhenskie.txt" />
   </ItemGroup>
 
   <ItemGroup>
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
     <PackageReference Include="Microsoft.Data.Sqlite" Version="9.0.0-preview.3.24172.4" />
+    <PackageReference Include="System.Data.SQLite" Version="1.0.118" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,6 +34,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Resource\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Rndmgenerator">
+      <HintPath>..\Rndmgenerator\Rndmgenerator\bin\Debug\Rndmgenerator.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

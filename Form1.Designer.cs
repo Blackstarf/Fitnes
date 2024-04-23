@@ -64,8 +64,10 @@
             textBox7 = new TextBox();
             label7 = new Label();
             panelshowclient = new Panel();
+            DataView = new DataGridView();
             label8 = new Label();
             panelchangeclient = new Panel();
+            label20 = new Label();
             label14 = new Label();
             label13 = new Label();
             button2 = new Button();
@@ -82,15 +84,23 @@
             timer1 = new System.Windows.Forms.Timer(components);
             pictureBox5 = new PictureBox();
             panel3 = new Panel();
-            panel9 = new Panel();
-            button4 = new Button();
-            label12 = new Label();
+            panel4 = new Panel();
             label11 = new Label();
             pictureBox7 = new PictureBox();
+            panel9 = new Panel();
+            button6 = new Button();
+            label12 = new Label();
             panel8 = new Panel();
             label3 = new Label();
             pictureBox3 = new PictureBox();
             panel7 = new Panel();
+            abonementpanel = new Panel();
+            label16 = new Label();
+            label19 = new Label();
+            button4 = new Button();
+            textBox4 = new TextBox();
+            textBox5 = new TextBox();
+            label15 = new Label();
             pictureBox8 = new PictureBox();
             label1 = new Label();
             panel2 = new Panel();
@@ -98,6 +108,13 @@
             panel1 = new Panel();
             pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
+            Фамилия = new DataGridViewTextBoxColumn();
+            Otchestvo = new DataGridViewTextBoxColumn();
+            Data = new DataGridViewTextBoxColumn();
+            Number = new DataGridViewTextBoxColumn();
+            Age = new DataGridViewTextBoxColumn();
+            Status = new DataGridViewTextBoxColumn();
+            Abonement = new DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)pictureBox6).BeginInit();
             panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox4).BeginInit();
@@ -105,14 +122,17 @@
             panelregclient.SuspendLayout();
             paneldeleteclient.SuspendLayout();
             panelshowclient.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)DataView).BeginInit();
             panelchangeclient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).BeginInit();
             panel3.SuspendLayout();
-            panel9.SuspendLayout();
+            panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox7).BeginInit();
+            panel9.SuspendLayout();
             panel8.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
             panel7.SuspendLayout();
+            abonementpanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).BeginInit();
             panel2.SuspendLayout();
             panel1.SuspendLayout();
@@ -250,7 +270,6 @@
             dateTimePicker1.Name = "dateTimePicker1";
             dateTimePicker1.Size = new Size(100, 23);
             dateTimePicker1.TabIndex = 38;
-            dateTimePicker1.ValueChanged += dateTimePicker2_ValueChanged;
             // 
             // podsk78Text
             // 
@@ -463,6 +482,7 @@
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(100, 23);
             textBox6.TabIndex = 24;
+            textBox6.KeyPress += text_KeyPress;
             // 
             // textBox7
             // 
@@ -470,6 +490,7 @@
             textBox7.Name = "textBox7";
             textBox7.Size = new Size(100, 23);
             textBox7.TabIndex = 23;
+            textBox7.KeyPress += text_KeyPress;
             // 
             // label7
             // 
@@ -483,12 +504,22 @@
             // panelshowclient
             // 
             panelshowclient.BackColor = Color.DarkGray;
+            panelshowclient.Controls.Add(DataView);
             panelshowclient.Controls.Add(label8);
             panelshowclient.Location = new Point(218, 3);
             panelshowclient.Name = "panelshowclient";
             panelshowclient.Size = new Size(498, 438);
             panelshowclient.TabIndex = 0;
             panelshowclient.Visible = false;
+            // 
+            // DataView
+            // 
+            DataView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            DataView.Location = new Point(12, 23);
+            DataView.Name = "DataView";
+            DataView.RowTemplate.Height = 25;
+            DataView.Size = new Size(474, 412);
+            DataView.TabIndex = 1;
             // 
             // label8
             // 
@@ -502,6 +533,7 @@
             // panelchangeclient
             // 
             panelchangeclient.BackColor = Color.DarkGray;
+            panelchangeclient.Controls.Add(label20);
             panelchangeclient.Controls.Add(label14);
             panelchangeclient.Controls.Add(label13);
             panelchangeclient.Controls.Add(button2);
@@ -520,7 +552,15 @@
             panelchangeclient.Size = new Size(498, 438);
             panelchangeclient.TabIndex = 1;
             panelchangeclient.Visible = false;
-            panelchangeclient.Paint += panelchangeclient_Paint;
+            // 
+            // label20
+            // 
+            label20.AutoSize = true;
+            label20.Location = new Point(22, 262);
+            label20.Name = "label20";
+            label20.Size = new Size(205, 15);
+            label20.TabIndex = 24;
+            label20.Text = "Запишите её в виде месяц/день/год";
             // 
             // label14
             // 
@@ -556,7 +596,6 @@
             textBox3.Name = "textBox3";
             textBox3.Size = new Size(143, 23);
             textBox3.TabIndex = 19;
-            textBox3.TextChanged += textBox3_TextChanged;
             // 
             // buttonBirthDate
             // 
@@ -624,6 +663,7 @@
             textBox2.Name = "textBox2";
             textBox2.Size = new Size(100, 23);
             textBox2.TabIndex = 12;
+            textBox2.KeyPress += text_KeyPress;
             // 
             // textBox1
             // 
@@ -631,6 +671,7 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(100, 23);
             textBox1.TabIndex = 11;
+            textBox1.KeyPress += text_KeyPress;
             // 
             // label9
             // 
@@ -657,48 +698,81 @@
             // panel3
             // 
             panel3.BackColor = Color.FromArgb(39, 40, 41);
+            panel3.Controls.Add(panel4);
             panel3.Controls.Add(panel9);
             panel3.Controls.Add(panel8);
             panel3.Controls.Add(panel7);
             panel3.Controls.Add(panel6);
             panel3.Controls.Add(panel5);
-<<<<<<< HEAD
+            panel3.Controls.Add(abonementpanel);
             panel3.Controls.Add(panelshowclient);
             panel3.Controls.Add(panelchangeclient);
             panel3.Controls.Add(panelregclient);
             panel3.Controls.Add(paneldeleteclient);
-=======
-            panel3.Controls.Add(panelregclient);
-            panel3.Controls.Add(paneldeleteclient);
-            panel3.Controls.Add(panelshowclient);
-            panel3.Controls.Add(panelchangeclient);
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
             panel3.Location = new Point(12, 120);
             panel3.Name = "panel3";
             panel3.Size = new Size(719, 444);
             panel3.TabIndex = 7;
             // 
+            // panel4
+            // 
+            panel4.BackColor = Color.FromArgb(39, 40, 41);
+            panel4.Controls.Add(label11);
+            panel4.Controls.Add(pictureBox7);
+            panel4.Location = new Point(3, 206);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(209, 44);
+            panel4.TabIndex = 13;
+            panel4.Click += PanelShowAbonement;
+            // 
+            // label11
+            // 
+            label11.AutoSize = true;
+            label11.BackColor = Color.Transparent;
+            label11.Cursor = Cursors.Hand;
+            label11.Dock = DockStyle.Right;
+            label11.Font = new Font("Lucida Sans Unicode", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label11.ForeColor = Color.FromArgb(255, 246, 224);
+            label11.Location = new Point(41, 0);
+            label11.Name = "label11";
+            label11.RightToLeft = RightToLeft.Yes;
+            label11.Size = new Size(127, 40);
+            label11.TabIndex = 9;
+            label11.Text = "Проверка\r\nабонементов";
+            label11.Click += PanelShowAbonement;
+            // 
+            // pictureBox7
+            // 
+            pictureBox7.BackColor = Color.Transparent;
+            pictureBox7.Cursor = Cursors.Hand;
+            pictureBox7.Dock = DockStyle.Right;
+            pictureBox7.Location = new Point(168, 0);
+            pictureBox7.Name = "pictureBox7";
+            pictureBox7.Size = new Size(41, 44);
+            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox7.TabIndex = 10;
+            pictureBox7.TabStop = false;
+            pictureBox7.Click += PanelShowAbonement;
+            // 
             // panel9
             // 
             panel9.BackColor = Color.FromArgb(39, 43, 49);
-            panel9.Controls.Add(button4);
+            panel9.Controls.Add(button6);
             panel9.Controls.Add(label12);
-            panel9.Controls.Add(label11);
-            panel9.Controls.Add(pictureBox7);
-            panel9.Location = new Point(3, 206);
+            panel9.Location = new Point(3, 256);
             panel9.Name = "panel9";
-            panel9.Size = new Size(209, 235);
+            panel9.Size = new Size(209, 185);
             panel9.TabIndex = 15;
             // 
-            // button4
+            // button6
             // 
-            button4.Location = new Point(4, 37);
-            button4.Name = "button4";
-            button4.Size = new Size(105, 51);
-            button4.TabIndex = 39;
-            button4.Text = "Сгенерировать клиентов";
-            button4.UseVisualStyleBackColor = true;
-            button4.Click += GenerateClientButton;
+            button6.Location = new Point(47, 85);
+            button6.Name = "button6";
+            button6.Size = new Size(104, 58);
+            button6.TabIndex = 14;
+            button6.Text = "Генирация 200 пользователей";
+            button6.UseVisualStyleBackColor = true;
+            button6.Click += button6_Click;
             // 
             // label12
             // 
@@ -711,31 +785,6 @@
             label12.Size = new Size(169, 20);
             label12.TabIndex = 13;
             label12.Text = "      Дата и время:";
-            // 
-            // label11
-            // 
-            label11.AutoSize = true;
-            label11.BackColor = Color.Transparent;
-            label11.Cursor = Cursors.Hand;
-            label11.Font = new Font("Lucida Sans Unicode", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
-            label11.ForeColor = Color.FromArgb(255, 246, 224);
-            label11.Location = new Point(53, 197);
-            label11.Name = "label11";
-            label11.RightToLeft = RightToLeft.Yes;
-            label11.Size = new Size(106, 35);
-            label11.TabIndex = 12;
-            label11.Text = "Назад";
-            // 
-            // pictureBox7
-            // 
-            pictureBox7.BackColor = Color.Transparent;
-            pictureBox7.Cursor = Cursors.Hand;
-            pictureBox7.Location = new Point(165, 197);
-            pictureBox7.Name = "pictureBox7";
-            pictureBox7.Size = new Size(41, 35);
-            pictureBox7.SizeMode = PictureBoxSizeMode.Zoom;
-            pictureBox7.TabIndex = 11;
-            pictureBox7.TabStop = false;
             // 
             // panel8
             // 
@@ -787,8 +836,78 @@
             panel7.TabIndex = 13;
             panel7.Click += PanelChangeClient;
             // 
+            // abonementpanel
+            // 
+            abonementpanel.BackColor = Color.DarkGray;
+            abonementpanel.Controls.Add(label16);
+            abonementpanel.Controls.Add(label19);
+            abonementpanel.Controls.Add(button4);
+            abonementpanel.Controls.Add(textBox4);
+            abonementpanel.Controls.Add(textBox5);
+            abonementpanel.Controls.Add(label15);
+            abonementpanel.Location = new Point(218, 3);
+            abonementpanel.Name = "abonementpanel";
+            abonementpanel.Size = new Size(498, 438);
+            abonementpanel.TabIndex = 1;
+            abonementpanel.Visible = false;
+            // 
+            // label16
+            // 
+            label16.AutoSize = true;
+            label16.Location = new Point(180, 173);
+            label16.Name = "label16";
+            label16.Size = new Size(75, 15);
+            label16.TabIndex = 32;
+            label16.Text = "Введите имя";
+            // 
+            // label19
+            // 
+            label19.AutoSize = true;
+            label19.Location = new Point(180, 99);
+            label19.Name = "label19";
+            label19.Size = new Size(108, 15);
+            label19.TabIndex = 31;
+            label19.Text = "Введите фамилию";
+            // 
+            // button4
+            // 
+            button4.Location = new Point(167, 243);
+            button4.Name = "button4";
+            button4.Size = new Size(130, 39);
+            button4.TabIndex = 30;
+            button4.Text = "Сколько осталось времени";
+            button4.UseVisualStyleBackColor = true;
+            button4.Click += button4_Click;
+            // 
+            // textBox4
+            // 
+            textBox4.Location = new Point(180, 195);
+            textBox4.Name = "textBox4";
+            textBox4.Size = new Size(100, 23);
+            textBox4.TabIndex = 29;
+            textBox4.KeyPress += text_KeyPress;
+            // 
+            // textBox5
+            // 
+            textBox5.Location = new Point(180, 126);
+            textBox5.Name = "textBox5";
+            textBox5.Size = new Size(100, 23);
+            textBox5.TabIndex = 28;
+            textBox5.KeyPress += text_KeyPress;
+            // 
+            // label15
+            // 
+            label15.AutoSize = true;
+            label15.Location = new Point(3, 0);
+            label15.Name = "label15";
+            label15.Size = new Size(69, 15);
+            label15.TabIndex = 0;
+            label15.Text = "Абонемент";
+            // 
             // pictureBox8
             // 
+            pictureBox8.ErrorImage = (Image)resources.GetObject("pictureBox8.ErrorImage");
+            pictureBox8.Image = (Image)resources.GetObject("pictureBox8.Image");
             pictureBox8.Location = new Point(180, -5);
             pictureBox8.Name = "pictureBox8";
             pictureBox8.Size = new Size(75, 61);
@@ -845,8 +964,10 @@
             // 
             // pictureBox2
             // 
+            pictureBox2.BackColor = Color.Transparent;
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox2.Cursor = Cursors.Hand;
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
             pictureBox2.Location = new Point(652, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(41, 39);
@@ -857,8 +978,10 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.BackColor = Color.Transparent;
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Cursor = Cursors.Hand;
+            pictureBox1.Image = Properties.Resources.close;
             pictureBox1.Location = new Point(699, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(41, 39);
@@ -866,6 +989,41 @@
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             pictureBox1.Click += CloseWindows;
+            // 
+            // Фамилия
+            // 
+            Фамилия.HeaderText = "Фамилия";
+            Фамилия.Name = "Фамилия";
+            // 
+            // Otchestvo
+            // 
+            Otchestvo.HeaderText = "Отчество";
+            Otchestvo.Name = "Otchestvo";
+            // 
+            // Data
+            // 
+            Data.HeaderText = "Дата рождения";
+            Data.Name = "Data";
+            // 
+            // Number
+            // 
+            Number.HeaderText = "Телефон";
+            Number.Name = "Number";
+            // 
+            // Age
+            // 
+            Age.HeaderText = "Возраст";
+            Age.Name = "Age";
+            // 
+            // Status
+            // 
+            Status.HeaderText = "Статус";
+            Status.Name = "Status";
+            // 
+            // Abonement
+            // 
+            Abonement.HeaderText = "Абонимент";
+            Abonement.Name = "Abonement";
             // 
             // Form1
             // 
@@ -880,7 +1038,6 @@
             Icon = (Icon)resources.GetObject("$this.Icon");
             Name = "Form1";
             Text = "Form1";
-            Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox6).EndInit();
             panel5.ResumeLayout(false);
             panel5.PerformLayout();
@@ -893,18 +1050,23 @@
             paneldeleteclient.PerformLayout();
             panelshowclient.ResumeLayout(false);
             panelshowclient.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)DataView).EndInit();
             panelchangeclient.ResumeLayout(false);
             panelchangeclient.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox5).EndInit();
             panel3.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             panel9.ResumeLayout(false);
             panel9.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox7).EndInit();
             panel8.ResumeLayout(false);
             panel8.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
             panel7.ResumeLayout(false);
             panel7.PerformLayout();
+            abonementpanel.ResumeLayout(false);
+            abonementpanel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox8).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -936,8 +1098,6 @@
         private Panel panel3;
         private Panel panel9;
         private Label label12;
-        private Label label11;
-        private PictureBox pictureBox7;
         private Panel panel8;
         private Label label3;
         private PictureBox pictureBox3;
@@ -976,7 +1136,6 @@
         private TextBox textBox1;
         private PictureBox pictureBox2;
         private PictureBox pictureBox1;
-<<<<<<< HEAD
         private Label label13;
         private Label label14;
         private Label label17;
@@ -984,8 +1143,25 @@
         private TextBox textBox6;
         private Label label18;
         private TextBox textBox7;
-=======
+        private Panel panel4;
+        private Label label11;
+        private PictureBox pictureBox7;
+        private Panel abonementpanel;
+        private Label label15;
+        private Label label16;
+        private Label label19;
         private Button button4;
->>>>>>> ffa477e0d237ae1c1408ef1122b919ab30db91e6
+        private TextBox textBox4;
+        private TextBox textBox5;
+        private DataGridViewTextBoxColumn Фамилия;
+        private DataGridViewTextBoxColumn Otchestvo;
+        private DataGridViewTextBoxColumn Data;
+        private DataGridViewTextBoxColumn Number;
+        private DataGridViewTextBoxColumn Age;
+        private DataGridViewTextBoxColumn Status;
+        private DataGridViewTextBoxColumn Abonement;
+        private DataGridView DataView;
+        private Label label20;
+        private Button button6;
     }
 }
