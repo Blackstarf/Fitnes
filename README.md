@@ -33,43 +33,44 @@
 
 Для работы с базой данных SQLite в данном примере используется библиотека Microsoft.Data.Sqlite в среде программирования C#. Пример демонстрирует поиск клиента в базе данных по фамилии и имени.
 
-```
+``` C#
 using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
 {
-connection.Open();
 
-using (var command = connection.CreateCommand())
-{
-// Поиск клиента по фамилии и имени
-command.CommandText = "SELECT ID FROM clients WHERE FirstName = @firstName AND Name = @Name";
-command.Parameters.AddWithValue("@firstName", firstName);
-command.Parameters.AddWithValue("@Name", lastName);
+    connection.Open();
 
-using (var reader = command.ExecuteReader())
-{
-if (reader.Read())
-{
-// Найден клиент, отображаем кнопки для редактирования данных
-ID = reader["ID"].ToString();
-buttonFirstName.Visible = true;
-buttonName.Visible = true;
-buttonPatronymic.Visible = true;
-buttonPhoneNumber.Visible = true;
-buttonBirthDate.Visible = true;
+    using (var command = connection.CreateCommand())
+          {
+           // Поиск клиента по фамилии и имени
+           command.CommandText = "SELECT ID FROM clients WHERE FirstName = @firstName AND Name = @Name";
+           command.Parameters.AddWithValue("@firstName", firstName);
+           command.Parameters.AddWithValue("@Name", lastName);
 
-// Убираем текстовые поля для ввода фамилии и имени
-textBox1.Visible = false;
-textBox2.Visible = false;
-button3.Visible = false;
-label13.Visible = false;
-label14.Visible = false;
-}
-else
-{
-MessageBox.Show("Client not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-}
-}
-}
+          using (var reader = command.ExecuteReader())
+          {
+                if (reader.Read())
+                {
+                     // Найден клиент, отображаем кнопки для редактирования данных
+                     ID = reader["ID"].ToString();
+                     buttonFirstName.Visible = true;
+                     buttonName.Visible = true;
+                     buttonPatronymic.Visible = true;
+                     buttonPhoneNumber.Visible = true;
+                     buttonBirthDate.Visible = true;
+
+                     // Убираем текстовые поля для ввода фамилии и имени
+                     textBox1.Visible = false;
+                     textBox2.Visible = false;
+                     button3.Visible = false;
+                     label13.Visible = false;
+                     label14.Visible = false;
+                }
+                else
+                {
+                     MessageBox.Show("Client not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+          }
+     }
 }
 напримере этого фрагмента кода расскажу как подключили бд в переменную path записали путь до базы данных задали разрешение читать и записывать
 потом мы подключились и открыли её дальше уже происходит запрос, а точнее поиск есть ли эти данные в бд или нет если да, то записывается ID чтобы потом менять параметры пользователя
