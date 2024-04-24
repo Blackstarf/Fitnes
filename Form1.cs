@@ -5,7 +5,6 @@ using System.Globalization;
 using Timer = System.Windows.Forms.Timer;
 namespace Fitnes
 {
-
     public partial class Form1 : Form
     {
         string? newValue;
@@ -74,8 +73,6 @@ namespace Fitnes
                 otchestvoRedStar.Visible = false;
             }
         }
-
-
         private void phoneNumBox_TextChanged_1(object sender, EventArgs e)
         {
             // Проверяем, пустое ли текстовое поле
@@ -156,8 +153,8 @@ namespace Fitnes
         }
         private void textBox6_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Разрешаем ввод только цифр и символа '.'
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '.')
+            // Разрешаем ввод только цифр и символа '/'
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != '/')
             {
                 e.Handled = true;
             }
@@ -195,96 +192,80 @@ namespace Fitnes
         {
             if (OtchestvoBox.Text != "" && phoneNumBox.Text != "" && nameBox.Text != "" && familiyaBox.Text != "")
             {
-                string[] Statuses = { "клиент", "бизнес-клиен", "вип-клиент" };
-
-                Random random = new Random();
-                int randomNumber = random.Next(0, 3);
-                int randomDay = random.Next(1, 365);
-                string FirstName1 = familiyaBox.Text;
-                string Name = nameBox.Text;
-                string OtName = OtchestvoBox.Text;
-                string Data2 = dateTimePicker1.Text;
-                string Number = phoneNumBox.Text;
-                DateTime birthDate = DateTime.Parse(dateTimePicker1.Text);
-
-                // Получаем текущую дату
-                DateTime currentDate = DateTime.Today;
-
-                // Рассчитываем разницу между текущей датой и датой рождения в годах
-                int age = currentDate.Year - birthDate.Year;
-
-                // Проверяем, нужно ли скорректировать возраст на основе месяца и дня рождения
-                if (currentDate.Month < birthDate.Month || (currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day))
+                if (phoneNumBox.Text.Length == 11 || phoneNumBox.Text.Length == 12)
                 {
-                    age--;
-                }
-                //using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
-                //{
-                //    connection.Open();
-                //    string sqlExpression = "WHERE Number = @Number";
-                //    using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
-                //    {
-                //        command.Parameters.AddWithValue("@Number", Number);
-                //    }
-                using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
-                {
-                    connection.Open();
+                    string[] Statuses = { "клиент", "бизнес-клиен", "вип-клиент" };
 
-                    // Проверяем, существует ли номер телефона в базе данных
-                    string checkPhoneNumberQuery = "SELECT COUNT(*) FROM clients WHERE Number = @Number";
-                    using (SqliteCommand checkPhoneNumberCommand = new SqliteCommand(checkPhoneNumberQuery, connection))
+                    Random random = new Random();
+                    int randomNumber = random.Next(0, 3);
+                    int randomDay = random.Next(1, 365);
+                    string FirstName1 = familiyaBox.Text;
+                    string Name = nameBox.Text;
+                    string OtName = OtchestvoBox.Text;
+                    string Data2 = dateTimePicker1.Text;
+                    string Number = phoneNumBox.Text;
+                    DateTime birthDate = DateTime.Parse(dateTimePicker1.Text);
+
+                    // Получаем текущую дату
+                    DateTime currentDate = DateTime.Today;
+
+                    // Рассчитываем разницу между текущей датой и датой рождения в годах
+                    int age = currentDate.Year - birthDate.Year;
+
+                    // Проверяем, нужно ли скорректировать возраст на основе месяца и дня рождения
+                    if (currentDate.Month < birthDate.Month || (currentDate.Month == birthDate.Month && currentDate.Day < birthDate.Day))
                     {
-                        checkPhoneNumberCommand.Parameters.AddWithValue("@Number", Number);
-                        int count = Convert.ToInt32(checkPhoneNumberCommand.ExecuteScalar());
+                        age--;
+                    }
+                    using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;Mode=ReadWrite;"))
+                    {
+                        connection.Open();
 
-                        // Если номер телефона уже существует, отображаем сообщение об ошибке
-                        if (count > 0)
+                        // Проверяем, существует ли номер телефона в базе данных
+                        string checkPhoneNumberQuery = "SELECT COUNT(*) FROM clients WHERE Number = @Number";
+                        using (SqliteCommand checkPhoneNumberCommand = new SqliteCommand(checkPhoneNumberQuery, connection))
                         {
-                            MessageBox.Show("Номер телефона уже существует в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return; // Прекращаем выполнение операции добавления
+                            checkPhoneNumberCommand.Parameters.AddWithValue("@Number", Number);
+                            int count = Convert.ToInt32(checkPhoneNumberCommand.ExecuteScalar());
+
+                            // Если номер телефона уже существует, отображаем сообщение об ошибке
+                            if (count > 0)
+                            {
+                                MessageBox.Show("Номер телефона уже существует в базе данных.", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                return; // Прекращаем выполнение операции добавления
+                            }
+                        }
+                        string sqlExpression = "INSERT INTO clients (FirstName, Name, Otchestvo, Data, Number, Age,Status,Subscription,ID,DateReg) VALUES (@FirstName, @Name, @OtName, @Data2, @Number, @age,@Statuses, @Days, @GuidID,@DateReg)";
+                        using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
+                        {
+                            command.Parameters.AddWithValue("@FirstName", FirstName1);
+                            command.Parameters.AddWithValue("@Name", Name);
+                            command.Parameters.AddWithValue("@OtName", OtName);
+                            command.Parameters.AddWithValue("@Data2", Data2);
+                            command.Parameters.AddWithValue("@Number", Number);
+                            command.Parameters.AddWithValue("@age", age);
+                            command.Parameters.AddWithValue("@Statuses", Statuses[randomNumber]);
+                            command.Parameters.AddWithValue("@Days", randomDay);
+                            command.Parameters.AddWithValue("@GuidID", Guid.NewGuid());
+                            command.Parameters.AddWithValue("@DateReg", Convert.ToString(DateTime.Now));
+                            command.ExecuteNonQuery();
                         }
                     }
-                    string sqlExpression = "INSERT INTO clients (FirstName, Name, Otchestvo, Data, Number, Age,Status,Subscription,ID,DateReg) VALUES (@FirstName, @Name, @OtName, @Data2, @Number, @age,@Statuses, @Days, @GuidID,@DateReg)";
-                    using (SqliteCommand command = new SqliteCommand(sqlExpression, connection))
-                    {
-                        // Добавьте параметры
-                        command.Parameters.AddWithValue("@FirstName", FirstName1);
-                        command.Parameters.AddWithValue("@Name", Name);
-                        command.Parameters.AddWithValue("@OtName", OtName);
-                        command.Parameters.AddWithValue("@Data2", Data2);
-                        command.Parameters.AddWithValue("@Number", Number);
-                        command.Parameters.AddWithValue("@age", age);
-                        command.Parameters.AddWithValue("@Statuses", Statuses[randomNumber]);
-                        command.Parameters.AddWithValue("@Days", randomDay);
-                        command.Parameters.AddWithValue("@GuidID", Guid.NewGuid());
-                        command.Parameters.AddWithValue("@DateReg", Convert.ToString(DateTime.Now));
-
-                        // Выполните запрос
-                        command.ExecuteNonQuery();
-                    }
-                    //string sqlExpression = "SELECT * FROM clients";
-                    //SqliteCommand command = new SqliteCommand(sqlExpression, connection);
-                    //using (SqliteDataReader reader = command.ExecuteReader())
-                    //{
-                    //    if (reader.HasRows) // если есть данные
-                    //    {
-                    //        while (reader.Read())   // построчно считываем данные
-                    //        {
-                    //        }
-                    //    }
-                    //}
+                    MessageBox.Show("Пользователь добавлен", "Успешно", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    OtchestvoBox.Text = null;
+                    nameBox.Text = null;
+                    familiyaBox.Text = null;
+                    phoneNumBox.Text = null;
+                    dateTimePicker1.Text = null;
                 }
-                MessageBox.Show("Пользователь добавлен", "Успешно", MessageBoxButtons.OKCancel, MessageBoxIcon.Information);
-                OtchestvoBox.Text = null;
-                nameBox.Text = null;
-                familiyaBox.Text = null;
-                phoneNumBox.Text = null;
-                dateTimePicker1.Text = null;
-                //}
+                else
+                {
+                    MessageBox.Show("!Вы ввели меньше 11 чисел номера!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
-                MessageBox.Show("!Вы добавили не все главные поля!", "Ошибка", MessageBoxButtons.OKCancel, MessageBoxIcon.Error);
+                MessageBox.Show("!Вы добавили не все главные поля!", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -348,6 +329,24 @@ namespace Fitnes
             textBox3.Visible = true;
             button2.Visible = true;
             newValue = columnName;
+            if (columnName == "Data")
+            {
+                textBox3.KeyPress += textBox6_KeyPress;
+                textBox3.KeyPress -= textBox_KeyPress;
+                textBox3.KeyPress -= text_KeyPress;
+            }
+            else if (columnName == "Number")
+            {
+                textBox3.KeyPress += textBox_KeyPress;
+                textBox3.KeyPress -= text_KeyPress;
+                textBox3.KeyPress -= textBox6_KeyPress;
+            }
+            else
+            {
+                textBox3.KeyPress += text_KeyPress;
+                textBox3.KeyPress -= textBox_KeyPress;
+                textBox3.KeyPress -= textBox6_KeyPress;
+            }
         }
         private void UpdateClientData(string columnName, string newValue)
         {
@@ -361,7 +360,7 @@ namespace Fitnes
                     {
                         if (columnName == "Data")
                         {
-
+                            textBox3.KeyPress += textBox6_KeyPress;
                             command.CommandText = $"UPDATE Clients SET {columnName} = @newValue, Age = @newAge WHERE ID = @id";
                             //DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
                             DateTime dateTime = DateTime.ParseExact(newValue, "MM/dd/yyyy", CultureInfo.InvariantCulture);
@@ -383,6 +382,21 @@ namespace Fitnes
 
                             command.Parameters.AddWithValue("@newAge", age);
                             command.Parameters.AddWithValue("@id", ID);
+                        }
+                        else if (columnName == "Number")
+                        {
+                            if (textBox3.Text.Length == 11 || textBox3.Text.Length == 12)
+                            {
+                                // Предполагая, что у нас есть колонка Id для идентификации клиента
+                                command.CommandText = $"UPDATE Clients SET {columnName} = @newValue WHERE ID = @id";
+                                command.Parameters.AddWithValue("@newValue", newValue);
+                                command.Parameters.AddWithValue("@id", ID);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Вы ввели мало цифр для номера", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                return;
+                            }
                         }
                         else
                         {
@@ -435,23 +449,38 @@ namespace Fitnes
         private void buttonFirstName_Click(object sender, EventArgs e)
         {
             ShowTextBoxAndUpdate("FirstName");
+            textBox3.KeyPress -= textBox6_KeyPress;
+            textBox3.KeyPress -= textBox_KeyPress;
+            label20.Visible = false;
         }
         private void buttonName_Click(object sender, EventArgs e)
         {
             ShowTextBoxAndUpdate("Name");
+            textBox3.KeyPress -= textBox6_KeyPress;
+            textBox3.KeyPress -= textBox_KeyPress;
+            label20.Visible = false;
         }
         private void buttonOtName_Click(object sender, EventArgs e)
         {
             ShowTextBoxAndUpdate("Otchestvo");
+            textBox3.KeyPress -= textBox6_KeyPress;
+            textBox3.KeyPress -= textBox_KeyPress;
+            label20.Visible = false;
         }
         private void buttonNumber_Click(object sender, EventArgs e)
         {
             ShowTextBoxAndUpdate("Number");
+            textBox3.KeyPress -= textBox6_KeyPress;
+            textBox3.KeyPress -= text_KeyPress;
+            label20.Visible = false;
         }
         private void buttonDateBirt_Click(object sender, EventArgs e)
         {
             label20.Visible = true;
             ShowTextBoxAndUpdate("Data");
+            textBox3.KeyPress -= text_KeyPress;
+            textBox3.KeyPress -= textBox_KeyPress;
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -473,6 +502,9 @@ namespace Fitnes
             button3.Visible = true;
             label13.Visible = true;
             label14.Visible = true;
+            textBox3.KeyPress -= textBox6_KeyPress;
+            textBox3.KeyPress -= text_KeyPress;
+            textBox3.KeyPress -= textBox_KeyPress;
         }
 
         private void textBox3_TextChanged(object sender, EventArgs e)
@@ -607,6 +639,11 @@ namespace Fitnes
             }
 
             RndmDBGenerator.GenerateRandomData(path);
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

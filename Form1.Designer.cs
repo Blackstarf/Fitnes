@@ -259,7 +259,7 @@
             panelregclient.Controls.Add(nameBox);
             panelregclient.Location = new Point(218, 3);
             panelregclient.Name = "panelregclient";
-            panelregclient.Size = new Size(498, 438);
+            panelregclient.Size = new Size(1125, 438);
             panelregclient.TabIndex = 1;
             panelregclient.Visible = false;
             // 
@@ -444,7 +444,7 @@
             paneldeleteclient.Controls.Add(label7);
             paneldeleteclient.Location = new Point(218, 3);
             paneldeleteclient.Name = "paneldeleteclient";
-            paneldeleteclient.Size = new Size(498, 438);
+            paneldeleteclient.Size = new Size(1125, 438);
             paneldeleteclient.TabIndex = 1;
             paneldeleteclient.Visible = false;
             // 
@@ -508,17 +508,17 @@
             panelshowclient.Controls.Add(label8);
             panelshowclient.Location = new Point(218, 3);
             panelshowclient.Name = "panelshowclient";
-            panelshowclient.Size = new Size(498, 438);
+            panelshowclient.Size = new Size(1125, 438);
             panelshowclient.TabIndex = 0;
             panelshowclient.Visible = false;
             // 
             // DataView
             // 
             DataView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            DataView.Location = new Point(12, 23);
+            DataView.Location = new Point(15, 23);
             DataView.Name = "DataView";
             DataView.RowTemplate.Height = 25;
-            DataView.Size = new Size(474, 412);
+            DataView.Size = new Size(1092, 412);
             DataView.TabIndex = 1;
             // 
             // label8
@@ -549,7 +549,7 @@
             panelchangeclient.Controls.Add(label9);
             panelchangeclient.Location = new Point(218, 3);
             panelchangeclient.Name = "panelchangeclient";
-            panelchangeclient.Size = new Size(498, 438);
+            panelchangeclient.Size = new Size(1125, 438);
             panelchangeclient.TabIndex = 1;
             panelchangeclient.Visible = false;
             // 
@@ -704,14 +704,14 @@
             panel3.Controls.Add(panel7);
             panel3.Controls.Add(panel6);
             panel3.Controls.Add(panel5);
-            panel3.Controls.Add(abonementpanel);
-            panel3.Controls.Add(panelshowclient);
             panel3.Controls.Add(panelchangeclient);
             panel3.Controls.Add(panelregclient);
             panel3.Controls.Add(paneldeleteclient);
+            panel3.Controls.Add(abonementpanel);
+            panel3.Controls.Add(panelshowclient);
             panel3.Location = new Point(12, 120);
             panel3.Name = "panel3";
-            panel3.Size = new Size(719, 444);
+            panel3.Size = new Size(1357, 444);
             panel3.TabIndex = 7;
             // 
             // panel4
@@ -847,7 +847,7 @@
             abonementpanel.Controls.Add(label15);
             abonementpanel.Location = new Point(218, 3);
             abonementpanel.Name = "abonementpanel";
-            abonementpanel.Size = new Size(498, 438);
+            abonementpanel.Size = new Size(1125, 438);
             abonementpanel.TabIndex = 1;
             abonementpanel.Visible = false;
             // 
@@ -932,8 +932,9 @@
             panel2.Controls.Add(label2);
             panel2.Location = new Point(12, 62);
             panel2.Name = "panel2";
-            panel2.Size = new Size(719, 52);
+            panel2.Size = new Size(1357, 52);
             panel2.TabIndex = 6;
+            panel2.Paint += panel2_Paint;
             // 
             // label2
             // 
@@ -957,7 +958,7 @@
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(743, 51);
+            panel1.Size = new Size(1381, 51);
             panel1.TabIndex = 5;
             panel1.MouseDown += panel1MouseDown;
             panel1.MouseMove += panelMouseMove;
@@ -968,7 +969,7 @@
             pictureBox2.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox2.Cursor = Cursors.Hand;
             pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
-            pictureBox2.Location = new Point(652, 3);
+            pictureBox2.Location = new Point(1281, 3);
             pictureBox2.Name = "pictureBox2";
             pictureBox2.Size = new Size(41, 39);
             pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
@@ -982,7 +983,7 @@
             pictureBox1.BackgroundImageLayout = ImageLayout.Zoom;
             pictureBox1.Cursor = Cursors.Hand;
             pictureBox1.Image = Properties.Resources.close;
-            pictureBox1.Location = new Point(699, 3);
+            pictureBox1.Location = new Point(1328, 3);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(41, 39);
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -1030,7 +1031,7 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.DimGray;
-            ClientSize = new Size(743, 575);
+            ClientSize = new Size(1381, 575);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(panel1);

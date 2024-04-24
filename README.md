@@ -87,4 +87,4 @@ using (var connection = new SqliteConnection($"Data Source={path};Cache=Default;
 ## Авторы программы
 
 ### Даниил Л. (Lalka5008)
-### Даниил К. (BlackStarf)
+### Данил К. (BlackStarf)
